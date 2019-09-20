@@ -62,10 +62,11 @@ class GlobalHeader(GlobalHeaderTuple):
 
     https://www.tcpdump.org/manpages/pcap-savefile.5.txt
     """
-    LENGTH = 24
+
     # https://docs.python.org/3/library/struct.html#format-characters
     FORMAT = "IHHIIII"
-    # def __init__(self, bytes):
+    LENGTH = 24
+
     def __new__(cls, bytes):
         return super(GlobalHeader, cls).__new__(
             cls, *struct.unpack(cls.FORMAT, bytes)
