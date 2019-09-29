@@ -1,7 +1,12 @@
 import argparse
 import http.server
 import json
+import socket
 
+serversocket = socket.socket(
+    family=socket.AF_INET, # for ipv4
+    type=socket.SOCK_DGRAM # for UDP
+)
 
 class JSONHeaderReporter(http.server.BaseHTTPRequestHandler):
     """
@@ -9,6 +14,7 @@ class JSONHeaderReporter(http.server.BaseHTTPRequestHandler):
     of the request headers.
     """
     def do_GET(self):
+        print("GET method")
         self.send_response(http.server.HTTPStatus.OK)
         body = json.dumps(dict(self.headers), indent=4).encode('utf8')
         self.send_header('Content-Length', str(len(body)))
