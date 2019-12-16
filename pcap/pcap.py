@@ -231,7 +231,7 @@ def run():
             packet_header = PacketHeader(bytes)
             packet_header.verify()
 
-            # Consume the ethernet header from the Glboal Packet header
+            # Consume the ethernet header from the Global Packet header
             ethernet_frame = f.read(packet_header.included_len)
             eth_header = EthernetHeader(ethernet_frame[:EthernetHeader.LENGTH])
             eth_header.verify()
