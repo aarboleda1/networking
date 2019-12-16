@@ -2,7 +2,11 @@ import struct
 import os
 from collections import namedtuple
 import argparse
+"""A program to parse raw binary data 
 
+Example usage:
+
+"""
 GlobalHeaderFormat = namedtuple(
     "GlobalHeaderFileFormat",
     [
@@ -201,16 +205,16 @@ class TCPSegmentHeader(TCPSegmentHeaderFormat):
     
 def run():
     parser = argparse.ArgumentParser(
-            description='Parse the pcapture of a mystery image download')    
-    parser.add_argument('-o', '--output',
-                        help='The destination file to write to write to')
+            description="Parse the pcapture of a mystery image download")    
+    parser.add_argument("-o", "--output",
+                        help="The destination file to write to write to")
+    parser.add_argument("-p","--path", help="path to pcap file to be parsed")
     args = parser.parse_args()
-    abs_path = os.path.dirname(os.path.abspath(__file__)) + "/net.cap"
     requesting_host = (192, 168, 0, 101)  # we know this is us
     
     # Map sequence numbers to data in each segment
     seq_num_to_data = {}
-    with open(abs_path, 'rb') as f:
+    with open(args.path, 'rb') as f:
         global_header = GlobalHeader(f.read(GlobalHeader.LENGTH))
         global_header.verify()
 
@@ -245,7 +249,6 @@ def run():
                 tcp_segment[:TCPSegmentHeader.DEFAULT_LENGTH]
             )
             tcp_header = TCPSegmentHeader(tcp_segment[:tcp_header_len])
-            tcp_header.verify()
             
             tcp_payload = tcp_segment[tcp_header_len:]
 
