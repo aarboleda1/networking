@@ -248,7 +248,7 @@ def run():
             ip_header = IPDatagramHeader(ip_datagram[:ip_header_length])
             ip_header.verify()
             
-            # the payload of the IP datagram is a TCP segment
+            # the rest of the IP datagram is a TCP segment
             tcp_segment = ip_datagram[ip_header_length:]
             tcp_header_len = 4 * TCPSegmentHeader.get_data_offset(
                 tcp_segment[:TCPSegmentHeader.DEFAULT_LENGTH]
