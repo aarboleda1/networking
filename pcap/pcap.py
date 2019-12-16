@@ -261,7 +261,8 @@ def run():
             if tuple(ip_header.dest_ip_addr) == requesting_host and not \
                     tcp_header.flags['SYN']:   
                 seq_num_to_data[tcp_header.seq_num] = tcp_payload
-
+        
+        # Packets may come out of order
         http_message = b''.join(d for _, d in sorted(seq_num_to_data.items()))
         http_header, http_payload = http_message.split(b'\r\n\r\n', 1)
         if args.output:
