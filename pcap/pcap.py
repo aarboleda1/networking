@@ -3,10 +3,10 @@ import os
 from collections import namedtuple
 import argparse
 
-"""A program to parse raw binary data. An exercise to 
-solidify networking concepts and understand how to parse 
-headers for very important network protocols, Ethernet, IP, 
-TCP, and HTTP
+"""A program to parse raw binary data. This exercise was a part
+of Bradfield CS networking course, allowing me to parse and work
+with headers for very important network protocols, Ethernet, IP, 
+TCP, HTTP and binary data!
 
 Example usage:
     python3 pcap.py -p net.cap -o my_image.jpg
